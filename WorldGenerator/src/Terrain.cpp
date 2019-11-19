@@ -3,7 +3,7 @@
 #include "../Perlin_Noise/ppm.h"
 #include "ofMain.h"
 
-/*ppm Terrain::GenerateNoise(int seed) {
+ppm Terrain::GenerateNoise(int seed) {
     // Define the size of the image
     unsigned int width = kterrain_width, height = kterrain_length;
 
@@ -69,4 +69,4 @@ std::vector<ofBoxPrimitive> Terrain::InitializeTerrain() {
 	}
 
 	return terrain_blocks;
-}*/
+}
