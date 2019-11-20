@@ -41,20 +41,16 @@ ppm Terrain::GenerateNoise(int seed) {
     return image;
 }
 
-std::vector<std::vector<int>> Terrain::GetTerrain() {
-    return std::vector<std::vector<int>>();
-}
-
 Terrain::Terrain(int seed) {
     ppm perlin_noise = GenerateNoise(seed);
 
     for (int i = 0; i < perlin_noise.r.size(); i++) {
-        terrain[i / kterrain_width][i % kterrain_length] = perlin_noise.r[i];
+        terrain[i / kterrain_width][i % kterrain_length] = perlin_noise.r[i]/25;
     }
 }
 
 std::vector<ofBoxPrimitive> Terrain::InitializeTerrain() {
-    std::vector<ofBoxPrimitive> terrain_blocks;
+    ofBoxPrimitive box;
     int height_sum = 0;
 
     for (int row = 0; row < kterrain_width; row++) {
@@ -63,10 +59,7 @@ std::vector<ofBoxPrimitive> Terrain::InitializeTerrain() {
         }
     }
 
-	for (int i = 0; i < height_sum; i++) {
-        ofBoxPrimitive box;
-        terrain_blocks.push_back(box);
-	}
+	std::vector<ofBoxPrimitive> terrain_blocks(height_sum, box);
 
 	return terrain_blocks;
 }
