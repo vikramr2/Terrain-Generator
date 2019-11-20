@@ -1,19 +1,6 @@
 #include "ofApp.h"
 #include "Terrain.h"
 
-
-float boxSize = 30;
-int posX = 0;
-int posY = 0;
-int posZ = 0;
-int x = 0;
-
-Terrain terrain(250);
-std::vector<ofBoxPrimitive> terrain_data = terrain.InitializeTerrain();
-
-ofBoxPrimitive box;
-//[terrain.kterrain_width];
-
 void ofApp::setup() {
     
     for (ofBoxPrimitive& block : terrain_data) {
@@ -24,15 +11,20 @@ void ofApp::setup() {
 	}*/
     // or
     // box.set( boxHeight, boxWidth, boxDepth );
+    //ofSetColor(0xffff00);
+    light.setup();
+    light.setPosition(100, 200, 0);
+    ofEnableDepthTest();
+    material.setShininess(0.02);
+    material.setDiffuseColor(ofFloatColor::red);
+
 }
 
 void ofApp::draw() {
-    
-    
-    
     int index = 0;
     int z = 0;
-    
+    cam.begin();
+    material.begin();
     for (int row = 0; row < terrain.kterrain_length; row++) {
         
         int x = 0;
@@ -48,7 +40,7 @@ void ofApp::draw() {
 
                 // get all the faces from the icoSphere, handy when you want to
                 // copy individual vertices or tweak them a little ;)
-                vector<ofMeshFace> triangles = box.getMesh().getUniqueFaces();
+                //vector<ofMeshFace> triangles = box.getMesh().getUniqueFaces();
 
 				/*box.setSideColor(ofBoxPrimitive::BoxSides::SIDES_TOTAL,
                                  ofColor::sandyBrown);
@@ -56,13 +48,13 @@ void ofApp::draw() {
                                     ofColor::forestGreen);
                                 //box.getMesh().*/
                 // now draw
-                ofSetColor(0xffffff);
+                //ofSetColor(0xffffff);
                 box.draw();
-                ofSetLineWidth(.5);
-                ofSetColor(0x000000);
-                box.drawWireframe();
+                //ofSetLineWidth(.5);
+                //ofSetColor(0x000000);
+                //box.drawWireframe();
 
-				y -= boxSize;
+				y += boxSize;
 				
                 index++;
             }
@@ -72,27 +64,8 @@ void ofApp::draw() {
 
 		z += boxSize;
     }
-    
-	//box.setPosition(ofGetWidth() * .2 + posX, ofGetHeight() * .75,
- //               posZ);
- //   vector<ofMeshFace> triangles = box.getMesh().getUniqueFaces();
-	//// now draw
- //   ofSetColor(0xffffff);
- //   box.draw();
- //   ofSetLineWidth(0.05);
- //   ofSetColor(0x000000);
- //   box.drawWireframe();
-    /*for (ofBoxPrimitive& block: box) {
-            block.setPosition(ofGetWidth() * .2 + posX + x, ofGetHeight() * .75,
-            posZ);
-			ofSetColor(0xffffff);
-			block.draw();
-			ofSetLineWidth(0.05);
-			ofSetColor(0x000000);
-			block.drawWireframe();
-			x += boxSize;
-	}
-    x = 0;*/
+    material.end();
+    cam.end();
 }
 
 void ofApp::update() {}

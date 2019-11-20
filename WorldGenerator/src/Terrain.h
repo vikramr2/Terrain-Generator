@@ -10,8 +10,8 @@ class Terrain {
     ppm GenerateNoise(int seed);
 
    public:
-    const static int kterrain_width = 20;
-    const static int kterrain_length = 20;
+    const static int kterrain_width = 40;
+    const static int kterrain_length = 40;
     unsigned int terrain[kterrain_width][kterrain_length];
     Terrain(int seed);
     std::vector<ofBoxPrimitive> InitializeTerrain();
