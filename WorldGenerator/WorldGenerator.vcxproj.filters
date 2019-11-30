@@ -16,10 +16,31 @@
 		<ClCompile Include="src\Terrain.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src\ofxCubeMap.cpp">
+			<Filter>addons\ofxCubeMap\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src\ofxMesh.cpp">
+			<Filter>addons\ofxMesh\src</Filter>
+		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<Filter Include="src">
 			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxCubeMap">
+			<UniqueIdentifier>{B9D17F6C-2369-3D35-A736-1A4B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxCubeMap\src">
+			<UniqueIdentifier>{1C1CC97B-FE16-22FF-3F9F-B9FD}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxMesh">
+			<UniqueIdentifier>{BD9AA79D-AE41-CE27-5E17-B49A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxMesh\src">
+			<UniqueIdentifier>{CECABC67-9795-64CC-7966-E543}</UniqueIdentifier>
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -31,6 +52,12 @@
 		</ClInclude>
 		<ClInclude Include="src\Terrain.h">
 			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src\ofxCubeMap.h">
+			<Filter>addons\ofxCubeMap\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src\ofxMesh.h">
+			<Filter>addons\ofxMesh\src</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>

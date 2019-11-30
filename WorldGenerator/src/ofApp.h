@@ -1,42 +1,54 @@
 #pragma once
 
+#include "../addons/ofxMeshUtils/src/ofxMeshUtils.h"
 #include "Terrain.h"
 #include "ofMain.h"
+#include "../addons/ofxMesh/src/ofxMesh.h"
+#include "../addons/ofxCubeMap/src/ofxCubeMap.h"
 
 class ofApp : public ofBaseApp {
    private:
-    float boxSize = 30;
-    int posX = -830;
-    int posY = -890;
-    int posZ = -1020;
-    int x = 0;
+	   //initialize position and size variables
+	   float boxSize = 30;
+	   int posX = -830;
+	   int posY = -890;
+	   int posZ = -1020;
+	   
+	   int x = 0;
+	   int y = 0;
+	   int z = 0;
+	   
+	   //initialize drawing variables
+	   ofxMesh mesh;
+	   ofMaterial material;
+	   
+	   //initialize terrain map
+	   Terrain terrain;
+	   
+	   //initialize camera and light
+	   ofEasyCam cam;
+	   ofLight light;
 
-    ofMaterial material;
-
-    Terrain terrain;
-    std::vector<ofBoxPrimitive> terrain_data;
-
-    ofBoxPrimitive box;
-    ofEasyCam cam;
-    ofLight light;
+	   //initialize skybox
+       ofxCubeMap skybox;
 
    public:
-    ofApp() : terrain(250) {
-        terrain_data = terrain.InitializeTerrain();
-    }
-    void setup();
-    void update();
-    void draw();
+	   //sets the terrain with a random seed
+	   ofApp() : terrain(rand() % 1000 + 1) {}
 
-    void keyPressed(int key);
-    void keyReleased(int key);
-    void mouseMoved(int x, int y);
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void mouseEntered(int x, int y);
-    void mouseExited(int x, int y);
-    void windowResized(int w, int h);
-    void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
+	   void setup();
+	   void update();
+	   void draw();
+
+	   void keyPressed(int key);
+	   void keyReleased(int key);
+	   void mouseMoved(int x, int y);
+	   void mouseDragged(int x, int y, int button);
+	   void mousePressed(int x, int y, int button);
+	   void mouseReleased(int x, int y, int button);
+	   void mouseEntered(int x, int y);
+	   void mouseExited(int x, int y);
+	   void windowResized(int w, int h);
+	   void dragEvent(ofDragInfo dragInfo);
+	   void gotMessage(ofMessage msg);
 };

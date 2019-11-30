@@ -7,12 +7,11 @@
 
 class Terrain {
    private:
-    ppm GenerateNoise(int seed);
+	   ppm GenerateNoise(int seed);
 
    public:
-    const static int kterrain_width = 40;
-    const static int kterrain_length = 40;
-    unsigned int terrain[kterrain_width][kterrain_length];
-    Terrain(int seed);
-    std::vector<ofBoxPrimitive> InitializeTerrain();
+	   const static int kterrain_width = 150;
+	   const static int kterrain_length = 150;
+	   unsigned int terrain[kterrain_width][kterrain_length];
+	   Terrain(int seed);
 };

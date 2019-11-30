@@ -1,4 +1,5 @@
 // Process a binary PPM file
+// Reference: https://solarianprogrammer.com/2012/07/18/perlin-noise-cpp-11/
 #include <fstream>
 #include <iostream>
 #include <sstream>

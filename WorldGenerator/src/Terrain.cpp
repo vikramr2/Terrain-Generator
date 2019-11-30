@@ -3,6 +3,13 @@
 #include "../Perlin_Noise/ppm.h"
 #include "ofMain.h"
 
+/**
+* @param seed the seed to generate this random terrain from
+* @return a ppm height map
+* 
+* @note this code was referenced from:
+* https://solarianprogrammer.com/2012/07/18/perlin-noise-cpp-11/
+*/
 ppm Terrain::GenerateNoise(int seed) {
     // Define the size of the image
     unsigned int width = kterrain_width, height = kterrain_length;
@@ -26,8 +33,8 @@ ppm Terrain::GenerateNoise(int seed) {
             double n = pn.noise(10 * x, 10 * y, 0.8);
 
             // Wood like structure
-            // n = 20 * pn.noise(x, y, 0.8);
-            // n = n - floor(n);
+            //n = 20 * pn.noise(x, y, 0.8);
+            //n = n - floor(n);
 
             // Map the values to the [0, 255] interval, for simplicity we use
             // tones of grey
@@ -41,25 +48,15 @@ ppm Terrain::GenerateNoise(int seed) {
     return image;
 }
 
+/**
+* Constructs the terrain map from a seed
+*/
 Terrain::Terrain(int seed) {
+	//generate perlin noise
     ppm perlin_noise = GenerateNoise(seed);
 
+	//structure into 2D array
     for (int i = 0; i < perlin_noise.r.size(); i++) {
-        terrain[i / kterrain_width][i % kterrain_length] = perlin_noise.r[i]/25;
+        terrain[i / kterrain_width][i % kterrain_length] = perlin_noise.r[i]/10;
     }
-}
-
-std::vector<ofBoxPrimitive> Terrain::InitializeTerrain() {
-    ofBoxPrimitive box;
-    int height_sum = 0;
-
-    for (int row = 0; row < kterrain_width; row++) {
-        for (int col = 0; col < kterrain_length; col++) {
-            height_sum += terrain[row][col];
-        }
-    }
-
-	std::vector<ofBoxPrimitive> terrain_blocks(height_sum, box);
-
-	return terrain_blocks;
 }

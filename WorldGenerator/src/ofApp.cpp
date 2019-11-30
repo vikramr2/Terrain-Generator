@@ -1,71 +1,63 @@
 #include "ofApp.h"
 #include "Terrain.h"
 
+//sets up the initial parameters of the world
 void ofApp::setup() {
-    
-    for (ofBoxPrimitive& block : terrain_data) {
-        block.set(boxSize);
-    }
-    /*for (int i = 0; i < terrain.kterrain_width; i++) {
-        box[i].set(boxSize);
-	}*/
-    // or
-    // box.set( boxHeight, boxWidth, boxDepth );
-    //ofSetColor(0xffff00);
+	//set up lighting
     light.setup();
     light.setPosition(100, 200, 0);
-    ofEnableDepthTest();
-    material.setShininess(0.02);
-    material.setDiffuseColor(ofFloatColor::red);
 
+	//Sets up shading, coloring, and framerate
+    ofEnableDepthTest();
+    material.setDiffuseColor(ofFloatColor::forestGreen);
+    ofSetFrameRate(30);
 }
 
+//repeats this function each frame
 void ofApp::draw() {
-    int index = 0;
-    int z = 0;
+	//initialize camera and material
     cam.begin();
     material.begin();
-    for (int row = 0; row < terrain.kterrain_length; row++) {
-        
-        int x = 0;
-        for (int col = 0; col < terrain.kterrain_width; col++) {
-            
-            int y = 0;
-            for (int dep = 0; dep < terrain.terrain[row][col]; dep++) {
-				
-                ofBoxPrimitive& box = terrain_data.at(index);
-                box.setPosition(ofGetWidth() * .2 + posX + x,
-                                                   ofGetHeight() * .75 + posY + y,
-                                                   posZ + z);
 
-                // get all the faces from the icoSphere, handy when you want to
-                // copy individual vertices or tweak them a little ;)
-                //vector<ofMeshFace> triangles = box.getMesh().getUniqueFaces();
-
-				/*box.setSideColor(ofBoxPrimitive::BoxSides::SIDES_TOTAL,
-                                 ofColor::sandyBrown);
-                box.setSideColor(ofBoxPrimitive::BoxSides::SIDE_FRONT,
-                                    ofColor::forestGreen);
-                                //box.getMesh().*/
-                // now draw
-                //ofSetColor(0xffffff);
-                box.draw();
-                //ofSetLineWidth(.5);
-                //ofSetColor(0x000000);
-                //box.drawWireframe();
-
-				y += boxSize;
-				
-                index++;
-            }
-
-			x += boxSize;
-		}
-
-		z += boxSize;
+	//shapes the base surface
+	y = 0;
+    for (int row = 0; row < terrain.kterrain_length - 1; row++) {
+        x = 0;
+        for (int col = 0; col < terrain.kterrain_width - 1; col++) {
+            mesh.addFace(ofPoint(ofGetWidth() * .2 + posX + x,
+                                   posY + (terrain.terrain[row][col] * boxSize),
+                                   ofGetHeight() * .75 + posZ + y), 
+						 ofPoint(ofGetWidth() * .2 + posX + x + boxSize,
+                                   posY + (terrain.terrain[row][col + 1] * boxSize),
+                                   ofGetHeight() * .75 + posZ + y),
+						 ofPoint(ofGetWidth() * .2 + posX + x + boxSize,
+								 posY + (terrain.terrain[row + 1][col + 1] * boxSize),
+								 ofGetHeight() * .75 + posZ + y + boxSize));
+            mesh.addFace(
+                ofPoint(ofGetWidth() * .2 + posX + x,
+                        posY + (terrain.terrain[row][col] * boxSize),
+                        ofGetHeight() * .75 + posZ + y),
+                ofPoint(ofGetWidth() * .2 + posX + x + boxSize,
+                        posY + (terrain.terrain[row + 1][col + 1] * boxSize),
+                        ofGetHeight() * .75 + posZ + y + boxSize),
+                ofPoint(ofGetWidth() * .2 + posX + x,
+                        posY + (terrain.terrain[row + 1][col] * boxSize),
+                        ofGetHeight() * .75 + posZ + y + boxSize));
+            x += boxSize;
+        }
+        y += boxSize;
     }
+
+	//fills the surface with the material
+    mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+
+	//draws the surface
+    mesh.draw();
+
+	//resets conditions
     material.end();
     cam.end();
+    mesh.clear();
 }
 
 void ofApp::update() {}
@@ -73,27 +65,27 @@ void ofApp::update() {}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     if (key == OF_KEY_LEFT) {
-        posX+=10;
+        cam.move(-10, 0, 0);
     }
 
-	if (key == OF_KEY_RIGHT) {
-        posX -= 10;
+    if (key == OF_KEY_RIGHT) {
+        cam.move(10, 0, 0);
     }
 
     if (key == OF_KEY_UP) {
-        posZ+=10;
+        cam.move(0, 0, -10);
     }
 
-	if (key == OF_KEY_DOWN) {
-        posZ-=100;
+    if (key == OF_KEY_DOWN) {
+        cam.move(0, 0, 10);
     }
 
-	if (key == OF_KEY_TAB) {
-        posY -= 10;
+    if (key == OF_KEY_TAB) {
+        cam.move(0, 10, 0);
     }
 
-	if (key == OF_KEY_SHIFT) {
-        posY += 10;
+    if (key == OF_KEY_SHIFT) {
+        cam.move(0, -10, 0);
     }
 }
 
