@@ -9,15 +9,18 @@
 class ofApp : public ofBaseApp {
    private:
 	   //initialize position and size variables
-	   float boxSize = 30;
-	   int posX = -830;
-	   int posY = -890;
+	   float boxSize = 100;
+	   int posX = -1530;
+	   int posY = -2590;
 	   int posZ = -1020;
 	   
 	   int x = 0;
 	   int y = 0;
 	   int z = 0;
 	   
+	   //number of worlds possible
+       int num_worlds = 1000;
+
 	   //initialize drawing variables
 	   ofxMesh mesh;
 	   ofMaterial material;
@@ -32,9 +35,13 @@ class ofApp : public ofBaseApp {
 	   //initialize skybox
        ofxCubeMap skybox;
 
+	   //initialize water
+	   ofBoxPrimitive water;
    public:
 	   //sets the terrain with a random seed
-	   ofApp() : terrain(rand() % 1000 + 1) {}
+	   ofApp() : terrain(rand() % num_worlds + 1) {}
+
+	   int sea_level = boxSize * (rand() % (256 / terrain.hill_index));
 
 	   void setup();
 	   void update();
