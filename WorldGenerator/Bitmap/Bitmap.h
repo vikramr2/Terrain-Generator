@@ -38,9 +38,43 @@ class Bitmap {
         pixel[1] = color.g;
         pixel[2] = color.r;
     }
-    void setDimensions(int, int);
-    int getSize();
-    bool write(string);
 
-    ~Bitmap();
+	void setDimensions(int w, int h) {
+        m_width = w;
+        m_height = h;
+	}
+    
+	int getSize() { return m_width * m_height * sizeof(RBG); }
+
+    bool write(string filename) {
+		BitmapFileHeader fileHeader;
+        BitmapInfoHeader infoHeader;
+
+        fileHeader.fileSize =
+            sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + getSize();
+        fileHeader.dataOffset =
+            sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader);
+
+        infoHeader.width = m_width;
+        infoHeader.height = m_height;
+
+        ofstream file;
+        file.open(filename, ios::out | ios::binary);
+
+        if (!file) {
+            return false;
+        }
+
+        file.write(reinterpret_cast<char *>(&fileHeader),
+                    sizeof(fileHeader));
+        file.write(reinterpret_cast<char *>(&infoHeader),
+                    sizeof(infoHeader));
+        file.write(reinterpret_cast<char *>(m_pixels.get()), getSize());
+
+        file.close();
+
+        return true;
+    }
+
+    Bitmap::~Bitmap() { cout << "bitmap destroyed" << endl; }
 };

@@ -20,5 +20,5 @@ class Terrain {
     unsigned int terrain[kterrain_width][kterrain_length];
     Terrain(int seed);
 
-    void GenerateTexture();
+    void GenerateTexture(ppm noise);
 };

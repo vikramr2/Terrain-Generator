@@ -37,6 +37,11 @@ class ofApp : public ofBaseApp {
 
 	   //initialize water
 	   ofBoxPrimitive water;
+
+	   //initialize texture
+       ofTexture mTex;
+
+	   ofImage tex_img;
    public:
 	   //sets the terrain with a random seed
 	   ofApp() : terrain(rand() % num_worlds + 1) {}

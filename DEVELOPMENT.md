@@ -15,6 +15,7 @@
 - Issues with skybox, as ofxskybox and ofxcubemap arent working...
 
 ***For Next Time***
-- Finish texturing and figure out skybox
-- Add player
-- Perhaps animate player?
+- Texturing
+- Skybox
+- Water GLSL
+- Trees
