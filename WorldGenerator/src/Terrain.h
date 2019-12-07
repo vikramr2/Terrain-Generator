@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "../Bitmap/Bitmap.h"
 #include "../Perlin_Noise/PerlinNoise.h"
 #include "../Perlin_Noise/ppm.h"
 #include "ofMain.h"
@@ -14,7 +13,7 @@ class Terrain {
 
    public:
     int terrain_seed;
-    const static int hill_index = 10;
+    int hill_index = (rand() % 10) + 5;
     const static int kterrain_width = 150;
     const static int kterrain_length = 150;
     unsigned int terrain[kterrain_width][kterrain_length];

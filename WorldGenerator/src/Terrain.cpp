@@ -76,27 +76,29 @@ void Terrain::GenerateTexture(ppm noise) {
     int mountain[3] = {151, 124, 83};
     int snow[3] = {255, 255, 255};
     int sand[3] = {194, 178, 128};
+    int mountaintop[3] = {108, 96, 83};
 
     // thresholds
-    int slope_threshold = 70;
+    int slope_threshold = 5;
     int sea_level_threshold = 6;
-    int mountain_cap_threshold = 200;
+    int mountain_cap_threshold = 175;
+    int below_cap_threshold = 20;
 
-    // mountain transform
+    // slope transform
     int slope_x;
     int slope_z;
     int max_slope;
     for (int kk = 0; kk < noise.r.size(); kk++) {
         if (kk % kterrain_length != 0) {
-            slope_x = abs(noise.r[kk] - noise.r[kk - 1]);
+            slope_x = abs(noise.r[kk] - noise.r[kk - 1])/hill_index;
         } else {
-            slope_x = abs(noise.r[kk] - noise.r[kk + 1]);
+            slope_x = abs(noise.r[kk] - noise.r[kk + 1])/hill_index;
         }
 
         if (kk / kterrain_width != 0) {
-            slope_z = abs(noise.r[kk] - noise.r[kk - kterrain_width]);
+            slope_z = abs(noise.r[kk] - noise.r[kk - kterrain_width])/hill_index;
         } else {
-            slope_z = abs(noise.r[kk] - noise.r[kk + kterrain_width]);
+            slope_z = abs(noise.r[kk] - noise.r[kk + kterrain_width])/hill_index;
         }
 
         max_slope = std::max(slope_x, slope_z);
@@ -109,11 +111,47 @@ void Terrain::GenerateTexture(ppm noise) {
         noise.b[kk] = grass[2] + int((mountain[2] - grass[2]) * max_slope/double(slope_threshold));
     }
 
+	//mountaintop transform
+    double height_ratio;
+    for (int kk = 0; kk < noise.r.size(); kk++) {
+        if (terrain[kk / kterrain_length][kk % kterrain_length] * hill_index >= mountain_cap_threshold - below_cap_threshold &&
+            terrain[kk / kterrain_length][kk % kterrain_length] * hill_index < mountain_cap_threshold) {
+            height_ratio = (mountain_cap_threshold - terrain[kk / kterrain_length][kk % kterrain_length] * hill_index) / double(below_cap_threshold);
+            
+			if (height_ratio > 1.0) {
+                height_ratio = 1.0;
+            }
+			
+			noise.r[kk] = noise.r[kk] + int((mountaintop[0] - noise.r[kk]) * height_ratio);
+            noise.g[kk] = noise.r[kk] + int((mountaintop[1] - noise.g[kk]) * height_ratio);
+            noise.b[kk] = noise.b[kk] + int((mountaintop[2] - noise.r[kk]) * height_ratio);
+		}
+    }
+
 	//snow transform
     for (int kk = 0; kk < noise.r.size(); kk++) {
-        if (terrain[kk / kterrain_length][kk % kterrain_length] >= mountain_cap_threshold) {
+        if (terrain[kk / kterrain_length][kk % kterrain_length] * hill_index >= mountain_cap_threshold) {
+            height_ratio = (255 - terrain[kk / kterrain_length][kk % kterrain_length] * hill_index) / double(255 - mountain_cap_threshold);
+            
+            noise.r[kk] = noise.r[kk] + int((snow[0] - noise.r[kk]) * height_ratio);
+            noise.g[kk] = noise.g[kk] + int((snow[0] - noise.g[kk]) * height_ratio);
+            noise.b[kk] = noise.b[kk] + int((snow[0] - noise.b[kk]) * height_ratio);
 
+			if (noise.r[kk] > 255) {
+                noise.r[kk] = 255;
+			}
+
+			if (noise.g[kk] > 255) {
+                noise.g[kk] = 255;
+            }
+
+			if (noise.b[kk] > 255) {
+                noise.b[kk] = 255;
+            }
         }
     }
+
+	
+
     noise.write("texture.ppm");
 }
