@@ -11,9 +11,14 @@ class ofApp : public ofBaseApp {
    private:
 	   //initialize position and size variables
 	   float boxSize = 100;
-	   int posX = -1530;
-	   int posY = -2590;
-	   int posZ = -1020;
+	   int posX = -6130;
+	   int posY = -4290;
+	   int posZ = -11020;
+       int back_boundary = -15820;
+       int front_boundary = -2320;
+       int left_boundary = -3000;
+       int right_boundary = -14000;
+       int bottom_boundary = -2000;
 	   
 	   int x = 0;
 	   int y = 0;
@@ -33,20 +38,19 @@ class ofApp : public ofBaseApp {
 	   ofEasyCam cam;
 	   ofLight light;
 
-	   //initialize water
-	   ofBoxPrimitive water;
-
 	   //initialize texture
        ofTexture mTex;
-	   ofImage tex_img;
+       ofImage tex_img;
 
-       ofxCubeMap cubemap;
-	   
+	   //water
+       ofxMesh waterMesh;
+       int waves[Terrain::kterrain_width][Terrain::kterrain_length];
+       int sea_level;
    public:
 	   //sets the terrain with a random seed
 	   ofApp() : terrain(rand() % num_worlds + 1) {}
 
-	   int sea_level = boxSize * (rand() % (256 / terrain.hill_index));
+	   void setSeaLevel();
 
 	   void setup();
 	   void update();
