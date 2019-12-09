@@ -3,49 +3,41 @@
 
 // sets up the initial parameters of the world
 void ofApp::setup() {
+    //set up background
+    ofBackground(ofFloatColor::lightSkyBlue);
+
     // set up lighting
     light.setup();
     light.setPosition(100, 200, 0);
 
-    // Sets up shading, coloring, and framerate
+    // Sets up shading and framerate
     ofEnableDepthTest();
-    // material.setDiffuseColor(ofFloatColor::white);
-    ofSetFrameRate(30);
+    //ofSetFrameRate(30);
 
-    // set up skybox
-    skybox.loadImages(
-        "Assets/Daylight Box_Right.bmp", "Assets/Daylight Box_Left.bmp",
-        "Assets/Daylight Box_Top.bmp", "Assets/Daylight Box_Bottom.bmp",
-        "Assets/Daylight Box_Front.bmp", "Assets/Daylight_Box_Back.bmp");
+    // initialize water
+    water.set(terrain.kterrain_length * boxSize, sea_level, terrain.kterrain_width * boxSize);
 
-    skybox.bind();
-    skybox.drawSkybox(800);
-    water.set(terrain.kterrain_length * boxSize, sea_level,
-              terrain.kterrain_width * boxSize);
-
+	// set up texturing
     ofDisableArbTex();
     ofEnableNormalizedTexCoords();
-    ofLoadImage(mTex,
-                "C:\\Users\\Ramav\\source\\repos\\CS126FA19\\fantastic-finale-"
-                "vikramr2\\WorldGenerator\\bin\\texture.ppm");
-
-    std::cout << mTex.getWidth() << ", " << mTex.getHeight();
+    ofLoadImage(mTex, "Assets/texture.ppm");
 }
 
 // repeats this function each frame
 void ofApp::draw() {
+    //ofBackgroundGradient(ofFloatColor::lightSkyBlue, ofFloatColor::orangeRed,
+                         //OF_GRADIENT_LINEAR);
     // initialize camera and material
     cam.begin();
     material.begin();
     mTex.bind();
-
-    // skybox.drawSkybox(800);
-
+    
     // shapes the base surface
     y = 0;
     for (int row = 0; row < terrain.kterrain_length - 1; row++) {
         x = 0;
         for (int col = 0; col < terrain.kterrain_width - 1; col++) {
+			// create faces
             mesh.addFace(
                 ofPoint(ofGetWidth() * .2 + posX + x,
                         posY + (terrain.terrain[row][col] * boxSize),
@@ -56,9 +48,13 @@ void ofApp::draw() {
                 ofPoint(ofGetWidth() * .2 + posX + x + boxSize,
                         posY + (terrain.terrain[row + 1][col + 1] * boxSize),
                         ofGetHeight() * .75 + posZ + y + boxSize));
+
+			// mapping coordinates to texture
             mesh.addTexCoord(ofVec2f(col / (150.0), row / (150.0)));
             mesh.addTexCoord(ofVec2f((col + 1) / (150.0), row / (150.0))); 
-			mesh.addTexCoord(ofVec2f((col + 1) / (150.0), (row + 1) / (150.0))); 
+			mesh.addTexCoord(ofVec2f((col + 1) / (150.0), (row + 1) / (150.0)));
+
+			//repeat for adjacent triangles
             mesh.addFace(
                 ofPoint(ofGetWidth() * .2 + posX + x,
                         posY + (terrain.terrain[row][col] * boxSize),
@@ -69,6 +65,7 @@ void ofApp::draw() {
                 ofPoint(ofGetWidth() * .2 + posX + x,
                         posY + (terrain.terrain[row + 1][col] * boxSize),
                         ofGetHeight() * .75 + posZ + y + boxSize));
+
             mesh.addTexCoord(ofVec2f(col / (150.0), row / (150.0)));
             mesh.addTexCoord(ofVec2f((col + 1) / (150.0), (row + 1) / (150.0))); 
 			mesh.addTexCoord(ofVec2f((col + 1) / (150.0), row / (150.0))); 
@@ -77,31 +74,29 @@ void ofApp::draw() {
         y += boxSize;
     }
 
-    // fills the surface with the material
+    // fills the surface with the material and texture
     mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 
     // draws the surface
     mesh.draw();
 
-    // resets conditions
+    // resets surface conditions
     material.end();
     mTex.unbind();
-
+    cubemap.unbind();
     // draw water
     ofEnableAlphaBlending();
     ofSetColor(0, 0, 250, 127);
     water.setPosition(
         ofGetWidth() * .2 + posX + (terrain.kterrain_length * boxSize) / 2,
         posY,
-        ofGetHeight() * .75 + posZ + (terrain.kterrain_length * boxSize) /
-    2); water.draw(); ofDisableAlphaBlending();
-
+        ofGetHeight() * .75 + posZ + (terrain.kterrain_length * boxSize) / 2); 
+	water.draw(); 
+	ofDisableAlphaBlending();
+    
+	// reset remaining conditions
     cam.end();
     mesh.clear();
-
-    // skybox.unbind();
-    // std::cout << cam.getX() << ", " << cam.getY() << ", " << cam.getZ()
-    //        << std::endl;
 }
 
 void ofApp::update() {}
@@ -110,30 +105,26 @@ void ofApp::update() {}
 void ofApp::keyPressed(int key) {
     if (key == OF_KEY_LEFT) {
         posX += 100;
-        // cam.move(-100, 0, 0);
     }
 
     if (key == OF_KEY_RIGHT) {
         posX -= 100;
-        // cam.move(100, 0, 0);
     }
 
     if (key == OF_KEY_UP) {
         posZ += 100;
-        // cam.move(0, 0, -100);
     }
 
     if (key == OF_KEY_DOWN) {
         posZ -= 100;
-        // cam.move(0, 0, 100);
     }
 
-    if (key == OF_KEY_TAB) {
-        cam.move(0, 100, 0);
+    if (key == ' ') {
+        posY -= 100;
     }
 
     if (key == OF_KEY_SHIFT) {
-        cam.move(0, -100, 0);
+        posY += 100;
     }
 }
 

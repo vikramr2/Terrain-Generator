@@ -4,7 +4,8 @@
 #include "Terrain.h"
 #include "ofMain.h"
 #include "../addons/ofxMesh/src/ofxMesh.h"
-#include "../addons/ofxCubeMap/src/ofxCubeMap.h"
+#include "../addons/ofxCubemap/src/ofxCubemap.h"
+
 
 class ofApp : public ofBaseApp {
    private:
@@ -32,16 +33,15 @@ class ofApp : public ofBaseApp {
 	   ofEasyCam cam;
 	   ofLight light;
 
-	   //initialize skybox
-       ofxCubeMap skybox;
-
 	   //initialize water
 	   ofBoxPrimitive water;
 
 	   //initialize texture
        ofTexture mTex;
-
 	   ofImage tex_img;
+
+       ofxCubeMap cubemap;
+	   
    public:
 	   //sets the terrain with a random seed
 	   ofApp() : terrain(rand() % num_worlds + 1) {}
