@@ -121,7 +121,6 @@ void ofApp::draw() {
     water_material.end();
     wave();
 
-	std::cout << cam.getLookAtDir() << std::endl;
     // reset remaining conditions
     cam.end();
     water_mesh.clear();
