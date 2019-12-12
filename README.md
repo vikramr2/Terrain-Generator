@@ -11,3 +11,9 @@ This experience is made interactive as you can fly around this world
 | `d`      | Move back                                                   |
 | `SPACE`  | Ascend                                                      |
 | `SHIFT`  | Descend                                                     |
+
+## Dependencies
+- Visual Studio
+- OpenFrameworks with C++
+- External Libraries
+	- OfxMesh
