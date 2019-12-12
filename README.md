@@ -20,3 +20,9 @@ This experience is made interactive as you can fly around this world
 - OpenFrameworks with C++
 - External Libraries
 	- OfxMesh
+
+## Installation (Windows Only)
+1. You can install the project generator for OpenFrameworks [here](https://openframeworks.cc/)
+2. Open the project generator, navigate to WorldGenerator folder, make sure ofxmesh is a dependency
+3. Update, Open in IDE
+4. Run WorldGenerator.vcxproj
