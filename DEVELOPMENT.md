@@ -1,31 +1,37 @@
-**Week 1 Progress**
+*Week 1 Progress*
+
 ***11/18***
+
 - A basic terrain shape is generated
 - Perlin Noise is read
 - OpenGL with lighting
 
-***For Next Time***
+**For Next Time**
 - Texturing
 - Skybox
 - Replace boxes with surface for larger worlds
 
-**Week 2/3 Progress**
+*Week 2/3 Progress*
+
 ***Thanksgiving Break***
+
 - The terrain is a lot bigger
 - It was converted into a surface rather than just blocks
 
 ***After Break***
+
 - Started with texture generation
 - Issues with skybox, as ofxskybox and ofxcubemap arent working...
 
-***For Next Time***
+**For Next Time**
 - Texturing
 - Skybox
+
 ****Reach Goals****
 - Water GLSL
 - Trees
 
-**Final Week Progress**
+*Final Week Progress*
 ***12/5***
 - Skybox is tough to create
 - Looked at online sources, tried different libraries
