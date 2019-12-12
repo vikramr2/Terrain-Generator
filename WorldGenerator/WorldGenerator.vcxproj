@@ -100,7 +100,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
 		</ClCompile>
@@ -120,7 +120,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
@@ -140,7 +140,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
@@ -163,7 +163,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
 		</ClCompile>
@@ -183,13 +183,11 @@
 		<ClCompile Include="src\main.cpp" />
 		<ClCompile Include="src\ofApp.cpp" />
 		<ClCompile Include="src\Terrain.cpp" />
-		<ClCompile Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src\ofxCubeMap.cpp" />
 		<ClCompile Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src\ofxMesh.cpp" />
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="src\ofApp.h" />
 		<ClInclude Include="src\Terrain.h" />
-		<ClInclude Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxCubeMap\src\ofxCubeMap.h" />
 		<ClInclude Include="..\..\..\..\..\OneDrive\Documents\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxMesh\src\ofxMesh.h" />
 	</ItemGroup>
 	<ItemGroup>
