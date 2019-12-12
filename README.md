@@ -26,3 +26,8 @@ This experience is made interactive as you can fly around this world
 2. Open the project generator, navigate to WorldGenerator folder, make sure ofxmesh is a dependency
 3. Update, Open in IDE
 4. Run WorldGenerator.vcxproj
+
+## Future Improvements
+- Random Tree Generation using Binary Trees
+- GUI to change generation factors
+- Animals and People
