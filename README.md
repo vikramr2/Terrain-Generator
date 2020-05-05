@@ -1,5 +1,5 @@
 # World Generator
-World Generator is a program that generates, a low poly 3D world with grass, water, and a sky!
+World Generator is a program that generates a low poly 3D world with grass, water, and a sky!
 This experience is made interactive as you can fly around this world
 
 [Terrain](https://ibb.co/BcYtFKL)
